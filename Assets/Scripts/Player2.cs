@@ -42,7 +42,6 @@ public class Player2 : MonoBehaviour
         {
             rb2d.AddForce(new Vector2(0, salto * alturaSalto)); //sube en Y
             holdJumpSecs = 1;
-
         }
 
         if (salto == 1)
