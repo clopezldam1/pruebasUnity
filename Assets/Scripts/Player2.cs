@@ -36,12 +36,20 @@ public class Player2 : MonoBehaviour
         salto = Input.GetAxis("Jump"); //returns 1 si tecla esta pusalda
         Debug.Log("Salto: " + salto);
 
-        while (salto == 1 && holdJumpSecs < 1)
+
+        holdJumpSecs -= Time.deltaTime; //saltas durante 1 segundo, te puedes mover en el aire
+        while (salto == 1 && holdJumpSecs >= 0) //esto crea bucle infinito
         {
             rb2d.AddForce(new Vector2(0, salto * alturaSalto)); //sube en Y
-            holdJumpSecs -= Time.deltaTime; //saltas durante 1 segundo, te puedes mover en el aire
-            rb2d.AddForce(new Vector2(0, (rb2d.position.y - salto * alturaSalto))); //baja en Y
+            holdJumpSecs = 1;
+
         }
+
+        if (salto == 1)
+        {
+            rb2d.AddForce(new Vector2(0, -salto * alturaSalto)); //baja en Y
+        }
+
     }
 
 }

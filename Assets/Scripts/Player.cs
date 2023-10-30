@@ -35,7 +35,7 @@ public class Player : MonoBehaviour
         if (timerSalto <= 0 && salto == 1)
         { //si timer es 0 puede saltar y si pulsa tecla salto
             //? no sé qué poner en el if para que solo salte 1 vez (que sin if vuela)
-            timerSalto = 3; //limitador: sollo puede salatr una vez cada 3 segundos, si mantienes pulsado vuelas
+            timerSalto = 1; //limitador: sollo puede salatr una vez cada 1 segundos, si mantienes pulsado vuelas
             rb2d.AddForce(new Vector2(0, salto * alturaSalto));
         }
     }
