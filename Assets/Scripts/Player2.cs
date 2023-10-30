@@ -10,8 +10,8 @@ public class Player2 : MonoBehaviour
     float speed = 5f;
     float salto;
     float timerSalto;
-    float alturaSalto = 100f; //f es unidad de fuerza - basada en newtons, es en relacion a cuanto te hace falta para levantar el cuerpo (aka, peso del rigbody)
-
+    float alturaSalto = 30f; //f es unidad de fuerza - basada en newtons, es en relacion a cuanto te hace falta para levantar el cuerpo (aka, peso del rigbody)
+    float holdJumpSecs;
 
     // Start is called before the first frame update
     void Start()
@@ -35,12 +35,12 @@ public class Player2 : MonoBehaviour
         //para que salte
         salto = Input.GetAxis("Jump"); //returns 1 si tecla esta pusalda
         Debug.Log("Salto: " + salto);
-        timerSalto -= Time.deltaTime;
-        if (timerSalto <= 0 && salto == 1)
-        { //si timer es 0 puede saltar y si pulsa tecla salto
-            //? no sé qué poner en el if para que solo salte 1 vez (que sin if vuela)
-            timerSalto = 3; //limitador: sollo puede salatr una vez cada 3 segundos, si mantienes pulsado vuelas
-            rb2d.AddForce(new Vector2(0, salto * alturaSalto));
+
+        while (salto == 1 && holdJumpSecs < 1)
+        {
+            rb2d.AddForce(new Vector2(0, salto * alturaSalto)); //sube en Y
+            holdJumpSecs -= Time.deltaTime; //saltas durante 1 segundo, te puedes mover en el aire
+            rb2d.AddForce(new Vector2(0, (rb2d.position.y - salto * alturaSalto))); //baja en Y
         }
     }
 
